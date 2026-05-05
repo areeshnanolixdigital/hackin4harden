@@ -12,6 +12,8 @@ import {
   Users,
 } from 'lucide-react'
 
+import { siteConfig } from '@/constants/site'
+
 /* All copy in this file is sourced from hackin4harden.com.
  * No invented perks, no invented metrics, no fabricated history.
  * Every value below traces back to source content captured in
@@ -241,7 +243,7 @@ export const FAQS = [
 export const PROOF_CHIPS = [
   { icon: CalendarRange, label: 'Saturday · June 6, 2026' },
   { icon: Sun, label: '7:30 AM Shotgun' },
-  { icon: MapPin, label: 'The Legacy Golf Club' },
+  { icon: MapPin, label: 'The Legacy Golf Club', href: siteConfig.event.mapsUrl },
   { icon: Heart, label: 'Benefiting First Tee of Phoenix' },
 ]
 

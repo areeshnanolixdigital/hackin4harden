@@ -8,7 +8,11 @@ import Section from '@/components/sections/section'
 import Button from '@/components/ui/button'
 import SectionHeader from '@/components/ui/section-header'
 
+import { siteConfig } from '@/constants/site'
+
 const Location = () => {
+  const { mapsUrl } = siteConfig.event
+
   return (
     <Section id="location" className="bg-cream-50">
       <SectionHeader
@@ -38,14 +42,23 @@ const Location = () => {
             </h3>
 
             <div className="border-cream-200 mt-7 space-y-5 border-t pt-6">
-              <div className="text-mesh-700 flex items-start gap-3 text-sm">
-                <MapPin className="mt-0.5 h-4 w-4 flex-none text-green-500" strokeWidth={1.75} />
-                <span>
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open The Legacy Golf Club address on Google Maps"
+                className="text-mesh-700 hover:text-navy-900 group flex items-start gap-3 text-sm transition-colors"
+              >
+                <MapPin
+                  className="mt-0.5 h-4 w-4 flex-none text-green-500 transition-colors group-hover:text-green-600"
+                  strokeWidth={1.75}
+                />
+                <span className="group-hover:underline group-hover:underline-offset-4">
                   6808 S 32nd St
                   <br />
                   Phoenix, AZ 85042-6004
                 </span>
-              </div>
+              </a>
               <div className="text-mesh-700 flex items-start gap-3 text-sm">
                 <Compass className="mt-0.5 h-4 w-4 flex-none text-green-500" strokeWidth={1.75} />
                 <span>Course: Legacy</span>
@@ -63,11 +76,7 @@ const Location = () => {
 
             <div className="border-cream-200 mt-8 border-t pt-6">
               <Button asChild variant="primary" size="md">
-                <Link
-                  href="https://www.google.com/maps/search/?api=1&query=The+Legacy+Golf+Club+Phoenix+AZ"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={mapsUrl} target="_blank" rel="noopener noreferrer">
                   Get directions <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
@@ -77,7 +86,13 @@ const Location = () => {
 
         {/* Map placeholder — styled card matching the homepage aesthetic */}
         <FadeIn className="lg:col-span-7" delay={0.12}>
-          <div className="border-navy-700 bg-navy-900 relative h-full min-h-[360px] overflow-hidden rounded-2xl border">
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open The Legacy Golf Club on Google Maps"
+            className="border-navy-700 bg-navy-900 hover:border-gold-400/60 group relative block h-full min-h-[360px] overflow-hidden rounded-2xl border transition-colors"
+          >
             <div
               className="absolute inset-0"
               style={{
@@ -90,8 +105,11 @@ const Location = () => {
 
             {/* Map pin emblem */}
             <div className="relative flex h-full w-full flex-col items-center justify-center p-10 text-center">
-              <div className="border-gold-400/40 bg-navy-800 flex h-16 w-16 items-center justify-center rounded-full border">
-                <MapPin className="text-gold-400 h-7 w-7" strokeWidth={1.5} />
+              <div className="border-gold-400/40 bg-navy-800 group-hover:border-gold-400/80 group-hover:bg-navy-700 flex h-16 w-16 items-center justify-center rounded-full border transition-all duration-300 group-hover:-translate-y-0.5">
+                <MapPin
+                  className="text-gold-400 group-hover:text-gold-300 h-7 w-7 transition-colors"
+                  strokeWidth={1.5}
+                />
               </div>
               <p className="text-gold-400 mt-6 font-mono text-[10px] font-semibold tracking-[0.32em] uppercase">
                 Phoenix, Arizona
@@ -108,7 +126,7 @@ const Location = () => {
               className="via-gold-400/80 pointer-events-none absolute inset-x-6 top-0 h-[2px] bg-gradient-to-r from-transparent to-transparent"
               aria-hidden
             />
-          </div>
+          </a>
         </FadeIn>
       </div>
     </Section>

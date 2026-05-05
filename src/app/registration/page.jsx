@@ -104,9 +104,18 @@ const RegistrationPage = () => {
             <CalendarRange className="text-gold-400 h-4 w-4" /> Saturday, June 6, 2026 · 7:30 AM
             shotgun
           </span>
-          <span className="inline-flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-green-300" /> The Legacy Golf Club, Phoenix
-          </span>
+          <a
+            href={siteConfig.event.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open The Legacy Golf Club on Google Maps"
+            className="hover:text-cream-50 group inline-flex items-center gap-2 transition-colors"
+          >
+            <MapPin className="h-4 w-4 text-green-300 transition-colors group-hover:text-green-200" />
+            <span className="group-hover:underline group-hover:underline-offset-4">
+              The Legacy Golf Club, Phoenix
+            </span>
+          </a>
         </div>
       </PageHero>
 

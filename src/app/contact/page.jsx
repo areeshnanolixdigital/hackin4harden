@@ -133,24 +133,33 @@ const ContactPage = () => {
             />
 
             {/* Venue card */}
-            <div className="border-cream-200 mt-10 rounded-2xl border bg-white p-7">
+            <a
+              href={siteConfig.event.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open The Legacy Golf Club on Google Maps"
+              className="border-cream-200 hover:border-gold-400/60 hover:shadow-elev group mt-10 block rounded-2xl border bg-white p-7 transition-all duration-300"
+            >
               <p className="text-gold-500 font-mono text-[11px] font-semibold tracking-[0.22em] uppercase">
                 Tournament venue
               </p>
-              <h3 className="font-display text-navy-900 mt-2 text-xl font-semibold tracking-tight">
+              <h3 className="font-display text-navy-900 group-hover:text-green-600 mt-2 text-xl font-semibold tracking-tight transition-colors">
                 The Legacy Golf Club
               </h3>
               <div className="text-mesh-700 mt-5 flex items-start gap-3 text-sm">
-                <MapPin className="mt-0.5 h-4 w-4 flex-none text-green-500" strokeWidth={1.75} />
-                <span>
+                <MapPin
+                  className="mt-0.5 h-4 w-4 flex-none text-green-500 transition-colors group-hover:text-green-600"
+                  strokeWidth={1.75}
+                />
+                <span className="group-hover:underline group-hover:underline-offset-4">
                   6808 S 32nd St
                   <br />
                   Phoenix, AZ 85042-6004
                   <br />
-                  <span className="text-mesh-500">Course: Legacy</span>
+                  <span className="text-mesh-500 no-underline">Course: Legacy</span>
                 </span>
               </div>
-            </div>
+            </a>
           </div>
 
           <FadeIn className="lg:col-span-7">

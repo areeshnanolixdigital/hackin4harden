@@ -32,6 +32,7 @@ export const siteConfig = {
     venue: 'The Legacy Golf Club',
     address: '6808 S 32nd St Phoenix, AZ 85042-6004',
     course: 'Legacy',
+    mapsUrl: 'https://maps.app.goo.gl/jr1n16BamQLzH32i9',
   },
   social: {
     instagram: 'https://www.instagram.com/hackinforharden',

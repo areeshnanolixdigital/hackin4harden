@@ -54,16 +54,36 @@ const FinalCta = () => {
           <Stagger className="mt-12 flex flex-wrap items-center justify-center gap-3" delay={0.06}>
             {PROOF_CHIPS?.map((chip) => {
               const Icon = chip.icon
+              const baseChip =
+                'border-cream-50/15 bg-cream-50/5 inline-flex items-center gap-2 rounded-full border px-4 py-2 backdrop-blur'
 
-              return (
-                <StaggerItem
-                  key={chip.label}
-                  className="border-cream-50/15 bg-cream-50/5 inline-flex items-center gap-2 rounded-full border px-4 py-2 backdrop-blur"
-                >
-                  <Icon className="h-3.5 w-3.5 text-green-300" strokeWidth={1.5} />
+              const inner = (
+                <>
+                  <Icon
+                    className="h-3.5 w-3.5 text-green-300 transition-colors group-hover:text-green-200"
+                    strokeWidth={1.5}
+                  />
                   <span className="text-cream-100/85 font-mono text-[11px] font-semibold tracking-[0.22em] uppercase">
                     {chip.label}
                   </span>
+                </>
+              )
+
+              return (
+                <StaggerItem key={chip.label}>
+                  {chip.href ? (
+                    <a
+                      href={chip.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open ${chip.label} on Google Maps`}
+                      className={`${baseChip} hover:border-gold-400/60 hover:bg-cream-50/10 group transition-colors`}
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <span className={baseChip}>{inner}</span>
+                  )}
                 </StaggerItem>
               )
             })}

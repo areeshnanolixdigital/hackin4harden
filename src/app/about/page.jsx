@@ -11,6 +11,8 @@ import Section from '@/components/sections/section'
 import Button from '@/components/ui/button'
 import SectionHeader from '@/components/ui/section-header'
 
+import { siteConfig } from '@/constants/site'
+
 export const metadata = {
   title: "About | Hackin' for Harden",
   description:
@@ -206,10 +208,21 @@ const About = () => {
                 so again this year. Legacy is where Josh worked and it represented his Golfing
                 Family in Arizona.
               </p>
-              <div className="border-cream-200 text-mesh-600 mt-7 flex items-start gap-3 border-t pt-5 text-sm">
-                <MapPin className="mt-0.5 h-4 w-4 flex-none text-green-500" strokeWidth={1.75} />
-                <span>6808 S 32nd St Phoenix, AZ 85042-6004 · Course: Legacy</span>
-              </div>
+              <a
+                href={siteConfig.event.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open The Legacy Golf Club on Google Maps"
+                className="border-cream-200 text-mesh-600 hover:text-navy-900 group mt-7 flex items-start gap-3 border-t pt-5 text-sm transition-colors"
+              >
+                <MapPin
+                  className="mt-0.5 h-4 w-4 flex-none text-green-500 transition-colors group-hover:text-green-600"
+                  strokeWidth={1.75}
+                />
+                <span className="group-hover:underline group-hover:underline-offset-4">
+                  6808 S 32nd St Phoenix, AZ 85042-6004 · Course: Legacy
+                </span>
+              </a>
             </MotionCard>
           </StaggerItem>
 

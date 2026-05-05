@@ -79,13 +79,24 @@ const SiteFooter = () => {
                 {contactEmail}
               </a>
             </li>
-            <li className="inline-flex items-start gap-2">
-              <MapPin className="text-gold-400 mt-0.5 h-3.5 w-3.5 flex-none" strokeWidth={1.75} />
-              <span>
-                {event.venue}
-                <br />
-                {event.address}
-              </span>
+            <li>
+              <a
+                href={event.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${event.venue} on Google Maps`}
+                className="hover:text-gold-300 group inline-flex items-start gap-2 transition-colors"
+              >
+                <MapPin
+                  className="text-gold-400 group-hover:text-gold-300 mt-0.5 h-3.5 w-3.5 flex-none transition-colors"
+                  strokeWidth={1.75}
+                />
+                <span>
+                  {event.venue}
+                  <br />
+                  {event.address}
+                </span>
+              </a>
             </li>
           </ul>
 

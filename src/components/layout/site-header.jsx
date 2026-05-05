@@ -91,12 +91,8 @@ const SiteHeader = () => {
                       className={cn(
                         'group/link relative inline-flex items-center px-4 py-2 text-[13.5px] font-medium tracking-tight transition-colors duration-200',
                         active
-                          ? scrolled
-                            ? 'text-green-600'
-                            : 'text-gold-300'
-                          : scrolled
-                            ? 'text-navy-800 hover:text-green-600'
-                            : 'text-cream-100/80 hover:text-cream-50',
+                          ? 'text-green-600'
+                          : 'text-navy-800 hover:text-green-600',
                       )}
                     >
                       <span className="relative">
@@ -104,21 +100,17 @@ const SiteHeader = () => {
                         <span
                           aria-hidden
                           className={cn(
-                            'ease-out-soft pointer-events-none absolute -bottom-1 left-0 h-px origin-left transition-transform duration-300',
+                            'ease-out-soft pointer-events-none absolute -bottom-1 left-0 h-px origin-left bg-green-500 transition-transform duration-300',
                             active
                               ? 'w-full scale-x-100'
                               : 'w-full scale-x-0 group-hover/link:scale-x-100',
-                            scrolled ? 'bg-green-500' : 'bg-gold-400',
                           )}
                         />
                       </span>
                       {active ? (
                         <motion.span
                           layoutId="nav-active-dot"
-                          className={cn(
-                            'ml-2 inline-block h-1.5 w-1.5 rounded-full',
-                            scrolled ? 'bg-green-500' : 'bg-gold-400',
-                          )}
+                          className="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-green-500"
                           transition={{ duration: 0.4, ease: EASE.outSoft }}
                         />
                       ) : null}
@@ -149,9 +141,7 @@ const SiteHeader = () => {
               onClick={() => setOpen((v) => !v)}
               className={cn(
                 'inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 lg:hidden',
-                scrolled
-                  ? 'border-cream-200 bg-cream-50 text-navy-900 hover:border-green-500 hover:text-green-600'
-                  : 'border-cream-50/25 bg-cream-50/5 text-cream-50 hover:border-cream-50/60 hover:bg-cream-50/10',
+                'border-cream-200 bg-cream-50/70 text-navy-900 hover:border-green-500 hover:text-green-600 hover:bg-cream-50',
               )}
             >
               <AnimatePresence initial={false} mode="wait">
@@ -207,7 +197,7 @@ const SiteHeader = () => {
           >
             {/* Backdrop */}
             <motion.div
-              className="bg-navy-950/70 absolute inset-0 backdrop-blur-sm"
+              className="bg-navy-900/30 absolute inset-0 backdrop-blur-sm"
               onClick={() => setOpen(false)}
             />
 
@@ -217,28 +207,28 @@ const SiteHeader = () => {
               animate={{ y: 0 }}
               exit={{ y: '-100%' }}
               transition={{ duration: 0.4, ease: EASE.outSoft }}
-              className="bg-navy-900 absolute inset-x-0 top-0 origin-top overflow-hidden pt-24 pb-10 shadow-2xl"
+              className="bg-cream-50 border-cream-200 absolute inset-x-0 top-0 origin-top overflow-hidden border-b pt-24 pb-10 shadow-[0_24px_60px_-24px_rgba(11,18,32,0.18)]"
             >
-              {/* Mesh-grid pattern matches hero */}
+              {/* Subtle mesh-grid keeps the warmth */}
               <div
-                className="bg-mesh-grid bg-grid-32 pointer-events-none absolute inset-0 opacity-50"
+                className="bg-mesh-grid bg-grid-32 pointer-events-none absolute inset-0 opacity-60"
                 aria-hidden
               />
               <div
                 className="pointer-events-none absolute -top-32 -right-24 h-[420px] w-[420px] rounded-full"
                 style={{
                   background:
-                    'radial-gradient(circle, rgba(194,138,32,0.18) 0%, rgba(194,138,32,0) 60%)',
+                    'radial-gradient(circle, rgba(194,138,32,0.12) 0%, rgba(194,138,32,0) 60%)',
                 }}
                 aria-hidden
               />
 
               <Container className="relative z-10">
-                <p className="text-gold-400 mb-6 font-mono text-[10px] font-semibold tracking-[0.26em] uppercase">
+                <p className="text-gold-500 mb-6 font-mono text-[10px] font-semibold tracking-[0.26em] uppercase">
                   Navigation
                 </p>
 
-                <ul className="divide-cream-50/8 divide-y">
+                <ul className="divide-cream-200 divide-y">
                   {NAV_LINKS?.map((link, idx) => {
                     const active = isActiveLink(pathname, link.href)
 
@@ -257,7 +247,7 @@ const SiteHeader = () => {
                           href={link.href}
                           className={cn(
                             'group flex items-center justify-between py-5 transition-colors duration-200',
-                            active ? 'text-gold-300' : 'text-cream-50 hover:text-gold-300',
+                            active ? 'text-green-600' : 'text-navy-900 hover:text-green-600',
                           )}
                         >
                           <span className="font-display text-2xl font-semibold tracking-tight">
@@ -266,9 +256,7 @@ const SiteHeader = () => {
                           <span
                             className={cn(
                               'font-mono text-[11px] font-semibold tracking-[0.22em] uppercase transition-colors',
-                              active
-                                ? 'text-gold-400'
-                                : 'text-cream-100/40 group-hover:text-gold-400',
+                              active ? 'text-green-500' : 'text-mesh-500 group-hover:text-gold-500',
                             )}
                           >
                             0{idx + 1}
@@ -292,7 +280,7 @@ const SiteHeader = () => {
                   <Button asChild variant="gold" size="lg" className="w-full">
                     <Link href={PRIMARY_CTA.href}>{PRIMARY_CTA.label}</Link>
                   </Button>
-                  <p className="text-cream-100/45 mt-4 text-center font-mono text-[11px] tracking-[0.22em] uppercase">
+                  <p className="text-mesh-600 mt-4 text-center font-mono text-[11px] tracking-[0.22em] uppercase">
                     11th Annual · June 6, 2026 · Phoenix, AZ
                   </p>
                 </motion.div>
