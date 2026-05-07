@@ -51,7 +51,14 @@
       "Bash(git mv *)",
       "Bash(rmdir src/app/privacy src/app/terms)",
       "Bash(grep -rn \"href=[\\\\\"']/privacy[\\\\\"']\\\\|href=[\\\\\"']/terms[\\\\\"']\\\\|href={[^}]*siteConfig\\\\.legalRoutes\\\\.\\\\|href=\\\\`/privacy\\\\`\\\\|href=\\\\`/terms\\\\`\" C:/Users/General/Documents/GitHub/hackin4harden/src/)",
-      "Bash(node sop-audit.js)"
+      "Bash(node sop-audit.js)",
+      "Bash(echo \"PID=$!\")",
+      "Bash(node -e \"require\\('./lib/helpers'\\).detectDevServers\\(\\).then\\(s => console.log\\(JSON.stringify\\(s\\)\\)\\)\")",
+      "Bash(TARGET_URL=http://localhost:3001 node run.js /tmp/playwright-test-navbar.js)",
+      "Bash(cygpath -m /tmp)",
+      "Bash(ls \"C:\\\\\\\\tmp\")",
+      "Bash(TARGET_URL=http://localhost:3001 node run.js \"C:/tmp/playwright-test-navbar.js\")",
+      "Bash(taskkill //PID 2500 //F)"
     ]
   }
 }

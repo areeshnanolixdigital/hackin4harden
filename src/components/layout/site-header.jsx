@@ -21,6 +21,24 @@ const isActiveLink = (pathname, href) => {
   return pathname?.startsWith(href)
 }
 
+// Pages whose hero block uses the dark navy background (PageHero). When the
+// navbar is in its transparent state over these heroes, it must flip to a
+// light treatment for legibility. Once scrolled, the cream surface kicks in
+// and we revert to the dark-on-cream treatment regardless of page.
+const DARK_HERO_PATHS = [
+  '/about',
+  '/contact',
+  '/photos',
+  '/registration',
+  '/privacy-policy',
+  '/terms-of-service',
+]
+
+const pageHasDarkHero = (pathname) => {
+  if (!pathname) return false
+  return DARK_HERO_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`))
+}
+
 const SiteHeader = () => {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -50,6 +68,11 @@ const SiteHeader = () => {
     setOpen(false)
   }, [pathname])
 
+  // When the navbar is transparent (top of page) AND the hero behind it is
+  // the dark navy PageHero, switch to the light "on-dark" treatment.
+  const isDarkHero = pageHasDarkHero(pathname)
+  const onDark = !scrolled && isDarkHero
+
   return (
     <>
       <motion.header
@@ -57,7 +80,7 @@ const SiteHeader = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.55, ease: EASE.outSoft }}
         className={cn(
-          'fixed inset-x-0 top-0 z-50 transition-[background,border-color,box-shadow] duration-300',
+          'fixed inset-x-0 top-0 z-50 transition-[background,border-color,box-shadow,color] duration-300',
           scrolled
             ? 'border-cream-200/70 bg-cream-50/85 border-b shadow-[0_8px_32px_-12px_rgba(11,18,32,0.12)] backdrop-blur-xl'
             : 'border-b border-transparent bg-transparent',
@@ -90,9 +113,13 @@ const SiteHeader = () => {
                       href={link.href}
                       className={cn(
                         'group/link relative inline-flex items-center px-4 py-2 text-[13.5px] font-medium tracking-tight transition-colors duration-200',
-                        active
-                          ? 'text-green-600'
-                          : 'text-navy-800 hover:text-green-600',
+                        onDark
+                          ? active
+                            ? 'text-gold-300'
+                            : 'text-cream-50/85 hover:text-gold-300'
+                          : active
+                            ? 'text-green-600'
+                            : 'text-navy-800 hover:text-green-600',
                       )}
                     >
                       <span className="relative">
@@ -100,7 +127,8 @@ const SiteHeader = () => {
                         <span
                           aria-hidden
                           className={cn(
-                            'ease-out-soft pointer-events-none absolute -bottom-1 left-0 h-px origin-left bg-green-500 transition-transform duration-300',
+                            'ease-out-soft pointer-events-none absolute -bottom-1 left-0 h-px origin-left transition-transform duration-300',
+                            onDark ? 'bg-gold-300' : 'bg-green-500',
                             active
                               ? 'w-full scale-x-100'
                               : 'w-full scale-x-0 group-hover/link:scale-x-100',
@@ -110,7 +138,10 @@ const SiteHeader = () => {
                       {active ? (
                         <motion.span
                           layoutId="nav-active-dot"
-                          className="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-green-500"
+                          className={cn(
+                            'ml-2 inline-block h-1.5 w-1.5 rounded-full',
+                            onDark ? 'bg-gold-300' : 'bg-green-500',
+                          )}
                           transition={{ duration: 0.4, ease: EASE.outSoft }}
                         />
                       ) : null}
@@ -140,8 +171,10 @@ const SiteHeader = () => {
               aria-controls="mobile-menu"
               onClick={() => setOpen((v) => !v)}
               className={cn(
-                'inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 lg:hidden',
-                'border-cream-200 bg-cream-50/70 text-navy-900 hover:border-green-500 hover:text-green-600 hover:bg-cream-50',
+                'inline-flex h-10 w-10 items-center justify-center rounded-full border transition-colors duration-200 lg:hidden',
+                onDark
+                  ? 'border-cream-50/30 bg-cream-50/[0.06] text-cream-50 hover:border-gold-300 hover:text-gold-300 hover:bg-cream-50/10'
+                  : 'border-cream-200 bg-cream-50/70 text-navy-900 hover:border-green-500 hover:text-green-600 hover:bg-cream-50',
               )}
             >
               <AnimatePresence initial={false} mode="wait">
