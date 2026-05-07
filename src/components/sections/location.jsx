@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { ArrowRight, Compass, MapPin, Phone } from 'lucide-react'
@@ -93,15 +94,23 @@ const Location = () => {
             aria-label="Open The Legacy Golf Club on Google Maps"
             className="border-navy-700 bg-navy-900 hover:border-gold-400/60 group relative block h-full min-h-[360px] overflow-hidden rounded-2xl border transition-colors"
           >
+            {/* Venue photo — aerial of The Legacy Golf Club */}
+            <Image
+              src="/asset/images/event-5.jpg"
+              alt="Aerial view of The Legacy Golf Club, Phoenix"
+              fill
+              sizes="(min-width: 1024px) 58vw, 100vw"
+              className="ease-out-soft object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+            />
             <div
               className="absolute inset-0"
               style={{
                 background:
-                  'linear-gradient(150deg, rgba(20,32,52,0.75) 0%, rgba(11,18,32,0.95) 60%)',
+                  'linear-gradient(150deg, rgba(20,32,52,0.62) 0%, rgba(11,18,32,0.86) 60%, rgba(11,18,32,0.92) 100%)',
               }}
               aria-hidden
             />
-            <div className="bg-mesh-grid bg-grid-32 absolute inset-0 opacity-40" aria-hidden />
+            <div className="bg-mesh-grid bg-grid-32 absolute inset-0 opacity-30" aria-hidden />
 
             {/* Map pin emblem */}
             <div className="relative flex h-full w-full flex-col items-center justify-center p-10 text-center">

@@ -58,7 +58,14 @@
       "Bash(cygpath -m /tmp)",
       "Bash(ls \"C:\\\\\\\\tmp\")",
       "Bash(TARGET_URL=http://localhost:3001 node run.js \"C:/tmp/playwright-test-navbar.js\")",
-      "Bash(taskkill //PID 2500 //F)"
+      "Bash(taskkill //PID 2500 //F)",
+      "Bash(TARGET_URL=http://localhost:3002 node run.js \"C:/tmp/playwright-test-images.js\")",
+      "Bash(TARGET_URL=http://localhost:3002 node run.js \"C:/tmp/playwright-test-images2.js\")",
+      "Bash(TARGET_URL=http://localhost:3002 node run.js \"C:/tmp/playwright-test-images3.js\")",
+      "Bash(TARGET_URL=http://localhost:3002 node run.js \"C:/tmp/playwright-test-images4.js\")",
+      "Bash(TARGET_URL=http://localhost:3002 node run.js \"C:/tmp/playwright-test-pageshealth.js\")",
+      "Bash(taskkill //F //FI \"WINDOWTITLE eq next dev*\")",
+      "Bash(taskkill //F //PID 1044)"
     ]
   }
 }

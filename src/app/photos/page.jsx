@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ArrowRight, Camera, Image as ImageIcon } from 'lucide-react'
+import { ArrowRight, Image as ImageIcon } from 'lucide-react'
 
 import FadeIn from '@/components/motion/fade-in'
 import MotionCard from '@/components/motion/motion-card'
@@ -21,40 +21,83 @@ export const metadata = {
     ' for Harden Memorial Golf Tournament at The Legacy Golf Club, Phoenix.',
 }
 
-// Placeholder gallery — the source /photos page contains only a heading and
-// no captioned imagery. These slots are styled placeholders awaiting real
-// photographs from the Harden family. Captions are intentionally generic
-// (no invented years, events, or contest names) until real metadata arrives.
-const GALLERY = Array.from({ length: 8 }).map((_, i) => {
-  const accent = i % 2 === 0 ? 'gold' : 'green'
-  const aspects = [
-    'aspect-[4/5]',
-    'aspect-[16/10]',
-    'aspect-[16/10]',
-    'aspect-[4/3]',
-    'aspect-[4/3]',
-    'aspect-[4/3]',
-    'aspect-[16/9]',
-    'aspect-[16/9]',
-  ]
-  const spans = [
-    'lg:col-span-4 lg:row-span-2',
-    'lg:col-span-4',
-    'lg:col-span-4',
-    'lg:col-span-4',
-    'lg:col-span-4',
-    'lg:col-span-4',
-    'lg:col-span-6',
-    'lg:col-span-6',
-  ]
-  return {
-    label: `Photo ${i + 1}`,
-    caption: 'Photograph coming soon',
-    accent,
-    span: spans[i],
-    aspect: aspects[i],
-  }
-})
+// Gallery photos — eleven years of tournament moments at The Legacy Golf
+// Club, Phoenix. Captions are intentionally generic (no invented years,
+// events, or contest names) until real metadata arrives from the family.
+const GALLERY = [
+  {
+    src: '/asset/images/event-2.jpg',
+    alt: 'Tournament golfers celebrating on the green at The Legacy Golf Club',
+    caption: 'On the green',
+    label: 'Photo 1',
+    accent: 'gold',
+    aspect: 'aspect-[4/5]',
+    span: 'lg:col-span-4 lg:row-span-2',
+  },
+  {
+    src: '/asset/images/event-5.jpg',
+    alt: 'Aerial view of The Legacy Golf Club clubhouse with golf carts staged for shotgun start',
+    caption: 'Shotgun start',
+    label: 'Photo 2',
+    accent: 'green',
+    aspect: 'aspect-[16/10]',
+    span: 'lg:col-span-4',
+  },
+  {
+    src: '/asset/images/event-6.jpg',
+    alt: 'Golfer at the tee with the Phoenix mountains in the distance',
+    caption: 'At the tee',
+    label: 'Photo 3',
+    accent: 'gold',
+    aspect: 'aspect-[16/10]',
+    span: 'lg:col-span-4',
+  },
+  {
+    src: '/asset/images/event-1.jpg',
+    alt: 'First Tee youth practicing on the green at the Hackin’ for Harden tournament',
+    caption: 'First Tee of Phoenix',
+    label: 'Photo 4',
+    accent: 'green',
+    aspect: 'aspect-[4/3]',
+    span: 'lg:col-span-4',
+  },
+  {
+    src: '/asset/images/event-3.jpg',
+    alt: 'Tournament participant coaching a young golfer through a swing',
+    caption: 'Passing the game on',
+    label: 'Photo 5',
+    accent: 'gold',
+    aspect: 'aspect-[4/3]',
+    span: 'lg:col-span-4',
+  },
+  {
+    src: '/asset/images/event-4.jpg',
+    alt: 'Four-person team posing on the course during the Hackin’ for Harden tournament',
+    caption: 'Four-person scramble',
+    label: 'Photo 6',
+    accent: 'green',
+    aspect: 'aspect-[4/3]',
+    span: 'lg:col-span-4',
+  },
+  {
+    src: '/asset/images/event-7.jpg',
+    alt: 'Close-up of a Titleist golf ball at the edge of the cup',
+    caption: 'On the lip',
+    label: 'Photo 7',
+    accent: 'gold',
+    aspect: 'aspect-[16/9]',
+    span: 'lg:col-span-6',
+  },
+  {
+    src: '/asset/images/event-8.jpg',
+    alt: 'Golf ball on the green with the flag in the distance',
+    caption: 'On the green',
+    label: 'Photo 8',
+    accent: 'green',
+    aspect: 'aspect-[16/9]',
+    span: 'lg:col-span-6',
+  },
+]
 
 const PhotosPage = () => {
   return (
@@ -102,48 +145,36 @@ const PhotosPage = () => {
                 glow={g.accent === 'gold' ? 'gold' : 'green'}
                 className={`border-navy-700 bg-navy-900 relative h-full w-full overflow-hidden rounded-2xl border ${g.aspect}`}
               >
-                {/* Placeholder visual */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      'linear-gradient(155deg, rgba(20,32,52,0.85) 0%, rgba(11,18,32,0.95) 60%, rgba(11,18,32,1) 100%)',
-                  }}
-                  aria-hidden
+                {/* Photograph */}
+                <Image
+                  src={g.src}
+                  alt={g.alt}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, (min-width: 640px) 50vw, 100vw"
+                  className="ease-out-soft object-cover transition-transform duration-700 group-hover/card:scale-[1.03]"
                 />
-                <div className="bg-mesh-grid bg-grid-32 absolute inset-0 opacity-30" aria-hidden />
 
-                {/* Soft accent halo */}
+                {/* Bottom-up gradient for caption legibility */}
                 <div
-                  className="pointer-events-none absolute inset-x-0 -top-12 mx-auto h-[200px] w-[200px] rounded-full"
+                  className="pointer-events-none absolute inset-0"
                   style={{
                     background:
-                      g.accent === 'gold'
-                        ? 'radial-gradient(circle, rgba(194,138,32,0.28) 0%, rgba(194,138,32,0) 65%)'
-                        : 'radial-gradient(circle, rgba(46,125,63,0.28) 0%, rgba(46,125,63,0) 65%)',
+                      'linear-gradient(180deg, rgba(11,18,32,0) 45%, rgba(11,18,32,0.55) 80%, rgba(11,18,32,0.92) 100%)',
                   }}
                   aria-hidden
                 />
 
-                {/* Centered logo emblem */}
-                <div className="relative flex h-full w-full flex-col items-center justify-center p-6 text-center">
-                  <div className="relative h-16 w-16 sm:h-20 sm:w-20">
-                    <Image src="/logo.webp" alt="" fill className="object-contain opacity-60" />
-                  </div>
-                  <Camera className="text-cream-100/40 mt-3 h-4 w-4" strokeWidth={1.5} />
-                </div>
-
-                {/* Top-right badge — neutral placeholder marker */}
+                {/* Top-right badge — index marker */}
                 <div className="absolute top-4 right-4">
                   <Badge variant={g.accent === 'gold' ? 'gold' : 'green'}>{g.label}</Badge>
                 </div>
 
-                {/* Bottom caption — neutral until real photo metadata arrives */}
-                <div className="border-cream-50/10 bg-navy-950/85 absolute inset-x-0 bottom-0 border-t px-5 py-4 backdrop-blur">
-                  <h3 className="font-display text-cream-50 text-base font-semibold tracking-tight">
+                {/* Bottom caption */}
+                <div className="absolute inset-x-0 bottom-0 px-5 py-4">
+                  <h3 className="font-display text-cream-50 text-base font-semibold tracking-tight drop-shadow">
                     Hackin&apos; for Harden
                   </h3>
-                  <p className="text-cream-100/55 mt-0.5 font-mono text-[10px] tracking-[0.22em] uppercase">
+                  <p className="text-cream-100/85 mt-0.5 font-mono text-[10px] tracking-[0.22em] uppercase drop-shadow">
                     {g.caption}
                   </p>
                 </div>
