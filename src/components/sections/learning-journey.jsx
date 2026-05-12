@@ -19,7 +19,10 @@ const LearningJourney = () => {
         lead="Breakfast at 7:00 AM, shotgun start at 7:30 AM, lunch and awards at 12:00 PM. Four-person scramble across 18 holes at The Legacy Golf Club."
       />
 
-      <Stagger className="relative mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-5" delay={0.07}>
+      <Stagger
+        className="no-scrollbar relative mt-10 -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 scroll-px-5 sm:mt-14 sm:mx-0 sm:grid sm:snap-none sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-px-0 md:grid-cols-2 lg:grid-cols-5"
+        delay={0.07}
+      >
         {/* Connector line on lg+ */}
         <div
           className="via-gold-400/40 pointer-events-none absolute top-[58px] right-0 left-0 hidden h-px bg-gradient-to-r from-transparent to-transparent lg:block"
@@ -27,7 +30,10 @@ const LearningJourney = () => {
         />
 
         {JOURNEY_STEPS?.map((step, idx) => (
-          <StaggerItem key={step.step} className="relative">
+          <StaggerItem
+            key={step.step}
+            className="relative w-[78%] flex-none snap-start sm:w-auto sm:flex-initial"
+          >
             <div className="border-navy-700 bg-navy-800 ease-out-soft hover:border-navy-600 relative flex h-full flex-col rounded-xl border p-6 transition-colors duration-200">
               <div
                 className="absolute inset-x-6 top-0 h-[3px]"

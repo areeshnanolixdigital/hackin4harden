@@ -19,12 +19,15 @@ const WhyWeWin = () => {
         lead="Each year this event is a great opportunity to honor and celebrate Josh, while simultaneously giving back to an organization and sport that was his passion. Since 2015, the year over year donations to the Joshua Cole Harden Scholarship Fund have steadily grown."
       />
 
-      <Stagger className="mt-14 grid gap-6 md:grid-cols-2 lg:gap-7">
+      <Stagger className="no-scrollbar mt-10 -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 scroll-px-5 sm:mt-14 sm:mx-0 sm:grid sm:snap-none sm:gap-6 sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-px-0 lg:gap-7">
         {WHY_WE_WIN?.map((item, idx) => {
           const Icon = item.icon
 
           return (
-            <StaggerItem key={item.title}>
+            <StaggerItem
+              key={item.title}
+              className="w-[82%] flex-none snap-start sm:w-auto sm:flex-initial"
+            >
               <MotionCard
                 glow="green"
                 className="border-cream-200 h-full overflow-hidden rounded-xl border bg-white p-8"

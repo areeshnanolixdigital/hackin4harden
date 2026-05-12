@@ -71,7 +71,9 @@
       "Bash(PORT=3019 npx next dev -p 3019)",
       "Bash(echo \"Started PID $!\")",
       "Bash(awk '{print $5}')",
-      "Bash(xargs -r -I{} taskkill //PID {} //F)"
+      "Bash(xargs -r -I{} taskkill //PID {} //F)",
+      "Bash(npx eslint *)",
+      "Bash(npx next *)"
     ]
   }
 }

@@ -150,3 +150,13 @@ body {
     transform: translateX(0) !important;
   }
 }
+
+/* Hide native scrollbar on snap carousels — visual cleanliness on mobile.
+   Scroll affordance is given via partial peek + gradient fade on the edges. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -28,9 +28,15 @@ const Founders = () => {
         lead="The tournament is held in honor of Joshua Cole Harden. The Legacy Golf Club has hosted this event all eleven years."
       />
 
-      <Stagger className="mt-14 grid gap-6 md:grid-cols-3" delay={0.08}>
+      <Stagger
+        className="no-scrollbar mt-10 -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 scroll-px-5 sm:mt-14 sm:mx-0 sm:grid sm:snap-none sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-px-0 md:grid-cols-3"
+        delay={0.08}
+      >
         {FOUNDERS?.map((person) => (
-          <StaggerItem key={person.name}>
+          <StaggerItem
+            key={person.name}
+            className="w-[82%] flex-none snap-start sm:w-auto sm:flex-initial"
+          >
             <MotionCard
               glow={person.accent === 'gold' ? 'gold' : 'green'}
               className="border-navy-700 bg-navy-800 flex h-full flex-col overflow-hidden rounded-xl border p-8"

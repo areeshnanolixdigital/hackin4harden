@@ -32,12 +32,18 @@ const Ecosystem = () => {
         lead="Sponsors and registration options are available across every tier. Donations grow the Joshua Cole Harden Scholarship Fund and benefit The First Tee of Phoenix."
       />
 
-      <Stagger className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:auto-rows-[260px] lg:grid-cols-6">
+      <Stagger className="no-scrollbar mt-10 -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 scroll-px-5 sm:mt-14 sm:mx-0 sm:grid sm:grid-cols-1 sm:snap-none sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-px-0 md:grid-cols-2 lg:auto-rows-[260px] lg:grid-cols-6">
         {ECOSYSTEM?.map((card) => {
           const Icon = card.icon
 
           return (
-            <StaggerItem key={card.title} className={cn(card.span ?? 'lg:col-span-2')}>
+            <StaggerItem
+              key={card.title}
+              className={cn(
+                'w-[80%] flex-none snap-start sm:w-auto sm:flex-initial',
+                card.span ?? 'lg:col-span-2',
+              )}
+            >
               <MotionCard
                 glow={card.accent === 'gold' ? 'gold' : 'green'}
                 className="border-navy-700 bg-navy-900 flex h-full flex-col overflow-hidden rounded-2xl border p-7"

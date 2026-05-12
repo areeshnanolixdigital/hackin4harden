@@ -133,11 +133,17 @@ const About = () => {
           lead="Drawn from the Harden family's About page — three passages about Josh."
         />
 
-        <Stagger className="mt-14 grid gap-6 md:grid-cols-3" delay={0.1}>
+        <Stagger
+          className="no-scrollbar mt-10 -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 scroll-px-5 sm:mt-14 sm:mx-0 sm:grid sm:snap-none sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-px-0 md:grid-cols-3"
+          delay={0.1}
+        >
           {PILLARS.map((p) => {
             const Icon = p.icon
             return (
-              <StaggerItem key={p.title}>
+              <StaggerItem
+                key={p.title}
+                className="w-[82%] flex-none snap-start sm:w-auto sm:flex-initial"
+              >
                 <MotionCard
                   glow="green"
                   className="border-cream-200 h-full overflow-hidden rounded-xl border bg-white p-8"

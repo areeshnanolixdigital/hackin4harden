@@ -136,11 +136,14 @@ const PhotosPage = () => {
         />
 
         <Stagger
-          className="mt-14 grid gap-5 sm:grid-cols-2 lg:auto-rows-[260px] lg:grid-cols-12"
+          className="no-scrollbar mt-10 -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 scroll-px-5 sm:mt-14 sm:mx-0 sm:grid sm:snap-none sm:gap-5 sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-px-0 lg:auto-rows-[260px] lg:grid-cols-12"
           delay={0.07}
         >
           {GALLERY.map((g, i) => (
-            <StaggerItem key={i} className={g.span ?? 'lg:col-span-4'}>
+            <StaggerItem
+              key={i}
+              className={`aspect-[4/3] w-[80%] flex-none snap-start sm:aspect-auto sm:w-auto sm:flex-initial ${g.span ?? 'lg:col-span-4'}`}
+            >
               <MotionCard
                 glow={g.accent === 'gold' ? 'gold' : 'green'}
                 className={`border-navy-700 bg-navy-900 relative h-full w-full overflow-hidden rounded-2xl border ${g.aspect}`}

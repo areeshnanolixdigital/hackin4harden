@@ -22,9 +22,12 @@ const Testimonials = () => {
         lead="Three passages from the about page — Josh's love of the First Tee, his work as a TPC caddy, and the venue that has hosted this tournament every one of its eleven years."
       />
 
-      <Stagger className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <Stagger className="no-scrollbar mt-10 -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 scroll-px-5 sm:mt-14 sm:mx-0 sm:grid sm:snap-none sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-px-0 md:grid-cols-2 lg:grid-cols-3">
         {TESTIMONIALS?.map((t) => (
-          <StaggerItem key={t.track}>
+          <StaggerItem
+            key={t.track}
+            className="w-[82%] flex-none snap-start sm:w-auto sm:flex-initial"
+          >
             <MotionCard
               glow="green"
               className="border-cream-200 flex h-full flex-col overflow-hidden rounded-xl border bg-white p-8"
