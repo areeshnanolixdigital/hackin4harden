@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-
 import { Check, Mail, MapPin, Phone, Send, User } from 'lucide-react'
+
 
 import FadeIn from '@/components/motion/fade-in'
 import MotionCard from '@/components/motion/motion-card'
