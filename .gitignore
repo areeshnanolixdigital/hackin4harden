@@ -32,3 +32,9 @@ Thumbs.db
 *.tsbuildinfo
 next-env.d.ts
 .swc
+
+# Local scratch (test screenshots, API catalogs, GHL field dumps)
+tmp/
+
+# Playwright skill scratch
+.claude/skills/playwright-skill/.temp-execution-*.js

@@ -73,7 +73,29 @@
       "Bash(awk '{print $5}')",
       "Bash(xargs -r -I{} taskkill //PID {} //F)",
       "Bash(npx eslint *)",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "PowerShell(Get-Process *)",
+      "PowerShell(taskkill *)",
+      "Bash(node run.js \"C:/Users/Dev/AppData/Local/Temp/playwright-test-registration-ghl.js\")",
+      "Bash(powershell -NoProfile -Command \"Stop-Process -Id \\(Get-NetTCPConnection -LocalPort 3001 -ErrorAction SilentlyContinue\\).OwningProcess -Force -ErrorAction SilentlyContinue; echo done\")",
+      "Bash(grep -q \"Ready in\" /tmp/h4h-dev.log)",
+      "Bash(node run.js \"C:/Users/Dev/AppData/Local/Temp/playwright-test-registration-screenshot.js\")",
+      "PowerShell(Get-NetTCPConnection *)",
+      "PowerShell(Test-Path *)",
+      "Bash(bash /c/Users/Dev/AppData/Local/Temp/stripe-create-catalog.sh tmp/stripe-catalog.json)",
+      "Bash(curl -sS https://services.leadconnectorhq.com/locations/SgRQEPzLPZ2FqgmCw8Gl/customFields -H 'Authorization: Bearer pit-5d7c233a-3593-4d85-8700-0b47e1ac1478' -H 'Version: 2021-07-28' -H 'Accept: application/json')",
+      "Bash(cp /tmp/ghl-custom-fields.json c:/Users/Dev/Documents/GitHub/hackin4harden/tmp/ghl-custom-fields.json)",
+      "Bash(bash *)",
+      "Bash(node -e \"console.log\\(require\\('stripe'\\).VERSION\\)\")",
+      "Bash(node -e \"const s = require\\('stripe'\\); console.log\\('stripe module loaded:', typeof s\\)\")",
+      "Bash(grep -q \"Ready in\" /tmp/h4h-dev2.log)",
+      "Bash(node run.js \"C:/Users/Dev/AppData/Local/Temp/playwright-test-3-sections.js\")",
+      "PowerShell($path = 'c:/Users/Dev/Downloads/Hackin4Harden_Webhook_Blueprint.pdf'; $out = 'C:/Users/Dev/AppData/Local/Temp/h4h-blueprint-pdf.txt'; Add-Type -AssemblyName System.Text.Encoding; $bytes = [System.IO.File]::ReadAllBytes\\($path\\); $size = $bytes.Length; \"PDF size: $size bytes, will use OCR-free text extraction via PowerShell\"; # Try a simple approach: use the .docx text we already extracted \\(same content\\); echo \"Using previously-extracted docx text since PDF and DOCX share content\"; Get-Item 'C:/Users/Dev/AppData/Local/Temp/h4h-blueprint.txt' | Select-Object FullName, Length)",
+      "Bash(grep -q \"Ready in\" /tmp/h4h-dev3.log)",
+      "Bash(node run.js \"C:/Users/Dev/AppData/Local/Temp/playwright-h4h-decline-flow.js\")",
+      "Bash(rm -f /tmp/h4h-dev-restart.log)",
+      "Bash(grep -q \"Ready in\" /tmp/h4h-dev-restart.log)",
+      "Bash(git add *)"
     ]
   }
 }
