@@ -18,13 +18,25 @@
 
 const onlyDigits = (s) => (typeof s === 'string' ? s.replace(/\D+/g, '') : '')
 
-/* Drop the user's country code if they typed it. We OWN +1; the visible
- * "+1" prefix in the input is ours, not theirs. */
-const stripCountryCode = (digits) => {
-  if (digits.startsWith('1') && digits.length >= 11) return digits.slice(1)
-  if (digits === '1') return ''
-  return digits
-}
+/* Drop the country code if it's present. We OWN the leading "+1" and
+ * render it ourselves; any digit "1" at the front of the cleaned input
+ * is the country code, never the start of a local number.
+ *
+ * Two cases this handles correctly:
+ *
+ *   1) User pastes "+1 (555) 555-0100" → digits "15555550100" → strip
+ *      first "1" → "5555550100" → render "+1 (555) 555-0100".
+ *
+ *   2) The live re-format cycle. After we render "+1 (4" and the user
+ *      types "8", the browser sends back "+1 (48" → digits "148". The
+ *      "1" here is *our* prefix, not the user's input. Always stripping
+ *      it gives "48" → "+1 (48" → no drift.
+ *
+ * Per the North American Numbering Plan a US area code cannot begin
+ * with 1, so there is no real US phone number whose local portion
+ * starts with 1 — the "always strip leading 1" rule never eats real
+ * user input. */
+const stripCountryCode = (digits) => (digits.startsWith('1') ? digits.slice(1) : digits)
 
 const formatFromDigits = (rawDigits) => {
   const stripped = stripCountryCode(rawDigits).slice(0, 10)

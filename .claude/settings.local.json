@@ -113,7 +113,11 @@
       "Bash(rm -f /tmp/h4h-matt.log)",
       "Bash(grep -qE \"Ready in|Error\" /tmp/h4h-matt.log)",
       "Bash(node run.js \"C:/Users/Dev/AppData/Local/Temp/h4h-no-matt.js\")",
-      "Bash(node run.js \"C:/Users/Dev/AppData/Local/Temp/h4h-a2p.js\")"
+      "Bash(node run.js \"C:/Users/Dev/AppData/Local/Temp/h4h-a2p.js\")",
+      "Bash(rm -f /tmp/h4h-dev.log)",
+      "Bash(grep -qE \"Ready in|Error\" /tmp/h4h-dev.log)",
+      "Bash(node run.js \"C:/Users/Dev/AppData/Local/Temp/h4h-phone-repro.js\")",
+      "Bash(sort -k3 -n -r)"
     ]
   }
 }
