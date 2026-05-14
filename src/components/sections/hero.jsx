@@ -93,7 +93,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85, delay: 0.26, ease: EASE.outSoft }}
-              className="text-mesh-700 mt-5 max-w-2xl text-lg leading-[1.7]"
+              className="text-mesh-700 mt-5 max-w-2xl text-base leading-[1.7] sm:text-lg"
             >
               Since 2015, we&apos;ve gathered to honor Josh and support the scholarship fund in his
               name, benefiting kids at The First Tee of Phoenix. Join us on June 6 for our 11th year

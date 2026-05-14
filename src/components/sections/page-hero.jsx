@@ -77,7 +77,7 @@ const PageHero = ({ eyebrow, title, lead, align = 'left', children, className = 
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85, delay: 0.22, ease: EASE.outSoft }}
               className={cn(
-                'text-cream-100/80 mt-7 text-lg leading-[1.7] sm:text-xl',
+                'text-cream-100/80 mt-7 text-base leading-[1.7] sm:text-xl',
                 isCenter && 'mx-auto',
               )}
             >

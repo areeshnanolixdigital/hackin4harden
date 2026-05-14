@@ -70,7 +70,7 @@ const RegisterPage = () => {
             Reserve your spot at the <span className="text-gold-400">11th Annual</span>.
           </>
         }
-        lead="Both options include 18 holes with cart, breakfast, BBQ lunch buffet, prizes, hole-in-one contest, and proximity prizes."
+        lead="Choose a foursome or individual golfer registration. Both include 18 holes with cart, breakfast, BBQ lunch buffet, prizes, hole-in-one contest, and proximity prizes."
       >
         <div className="text-cream-100/70 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
           <span className="inline-flex items-center gap-2">
