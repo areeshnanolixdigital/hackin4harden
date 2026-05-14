@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { AnimatePresence, motion } from 'motion/react'
-import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 
 import MotionCard from '@/components/motion/motion-card'
 import Section from '@/components/sections/section'
@@ -34,12 +34,8 @@ const ctaIconBg = {
 }
 const ctaIconColor = { gold: 'text-gold-600', green: 'text-green-600' }
 
-const AUTO_ADVANCE_MS = 2000
+const AUTO_ADVANCE_MS = 3000
 
-/* Single card body — used both as the sticky Platinum slot and as the
- * carousel's current frame. Keeps the visual rules in one place so the
- * sticky card and the rotating cards look identical apart from their
- * surface tone. */
 const EcosystemCard = ({ card }) => {
   const Icon = card.icon
   const isCta = Boolean(card.cta)
@@ -113,33 +109,29 @@ const EcosystemCard = ({ card }) => {
           {card.description}
         </p>
       </div>
+
+      {/* Reserve space at the bottom for the absolute pagination bars
+       * so the description never collides with them. Only meaningful
+       * inside the rotating slot, but cheap to include in Platinum too
+       * (just empty padding) to keep both cards the same height. */}
+      <div className="h-6" aria-hidden />
     </MotionCard>
   )
 }
 
 const Ecosystem = () => {
-  /* Split the dataset: Platinum is sticky (left column on desktop,
-   * first card on mobile), the rest rotate in the carousel slot. */
+  /* Sticky Platinum + sponsor-only carousel. CTAs (Individual,
+   * Donation) are excluded from this section by design. */
   const platinum = ECOSYSTEM.find((c) => c.title === 'Platinum Sponsor')
-  const rotating = ECOSYSTEM.filter((c) => c !== platinum)
+  const rotating = ECOSYSTEM.filter((c) => c !== platinum && !c.cta)
 
   const [activeIdx, setActiveIdx] = useState(0)
-  /* Only the explicit play/pause button gates auto-advance. The
-   * earlier hover-pause was removed — it fought the button (mouse
-   * still on the carousel after Resume click kept it paused, which
-   * confused users). */
-  const [paused, setPaused] = useState(false)
-  /* Track scroll-direction for the slide animation. */
   const [direction, setDirection] = useState(1)
 
-  /* Mirror the live `paused` value into a ref so the setInterval
-   * callback always reads the latest. Without this, an in-flight tick
-   * scheduled before pause was toggled would still fire — letting one
-   * more advance slip through after the user clicked pause. */
-  const pausedRef = useRef(paused)
-  useEffect(() => {
-    pausedRef.current = paused
-  }, [paused])
+  /* Hover state pauses auto-advance via a ref the interval reads
+   * each tick. Using a ref avoids re-creating the interval on every
+   * pointerenter/leave and dodges the stale-closure bug. */
+  const hoverRef = useRef(false)
 
   const goTo = useCallback(
     (next, dir) => {
@@ -148,22 +140,16 @@ const Ecosystem = () => {
     },
     [rotating.length],
   )
-  const goNext = useCallback(() => goTo(activeIdx + 1, 1), [activeIdx, goTo])
-  const goPrev = useCallback(() => goTo(activeIdx - 1, -1), [activeIdx, goTo])
 
-  /* Single long-lived interval. Tick handler short-circuits via the ref
-   * when paused so toggling pause has immediate effect — no stale-
-   * closure race that lets a queued tick slip through. */
   useEffect(() => {
     const id = setInterval(() => {
-      if (pausedRef.current) return
+      if (hoverRef.current) return
       setDirection(1)
       setActiveIdx((i) => (i + 1) % rotating.length)
     }, AUTO_ADVANCE_MS)
     return () => clearInterval(id)
   }, [rotating.length])
 
-  /* Slide animation variants for the rotating slot. */
   const slideVariants = {
     enter: (dir) => ({ opacity: 0, x: dir > 0 ? 40 : -40 }),
     center: { opacity: 1, x: 0 },
@@ -184,22 +170,33 @@ const Ecosystem = () => {
         lead="Sponsors and registration options are available across every tier. Donations grow the Joshua Cole Harden Scholarship Fund and benefit The First Tee of Phoenix."
       />
 
-      <div className="mt-10 grid gap-6 sm:mt-14 sm:gap-7 lg:grid-cols-2">
-        {/* Sticky Platinum — left on desktop, first on mobile. */}
+      {/* items-stretch + h-full on each slot makes Platinum and the
+       * carousel card share the same row height. The pagination bars
+       * sit absolutely positioned over the carousel card so the layout
+       * matches Platinum's footprint exactly. */}
+      <div className="mt-10 grid items-stretch gap-6 sm:mt-14 sm:gap-7 lg:grid-cols-2">
+        {/* Sticky Platinum. */}
         {platinum ? (
           <Link
             href={platinum.href ?? '/registration'}
             aria-label={`Choose ${platinum.title} on the registration page`}
-            className="block rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50"
+            className="block h-full rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50"
           >
             <EcosystemCard card={platinum} />
           </Link>
         ) : null}
 
-        {/* Rotating slot — right on desktop, second on mobile. */}
-        <div className="relative">
-          {/* Carousel viewport */}
-          <div className="relative min-h-[260px]" aria-live="polite">
+        {/* Rotating slot — fills the row height and pauses on hover. */}
+        <div
+          className="relative h-full"
+          onMouseEnter={() => {
+            hoverRef.current = true
+          }}
+          onMouseLeave={() => {
+            hoverRef.current = false
+          }}
+        >
+          <div className="relative h-full" aria-live="polite">
             <AnimatePresence custom={direction} initial={false} mode="wait">
               <motion.div
                 key={active.title}
@@ -226,18 +223,11 @@ const Ecosystem = () => {
             </AnimatePresence>
           </div>
 
-          {/* Controls row — prev / dots / play-pause / next */}
-          <div className="mt-5 flex items-center justify-between gap-3">
-            <button
-              type="button"
-              onClick={goPrev}
-              aria-label="Previous sponsorship card"
-              className="border-cream-200 text-navy-900 hover:border-gold-400 hover:text-gold-600 inline-flex h-9 w-9 items-center justify-center rounded-full border bg-white transition-colors"
-            >
-              <ChevronLeft className="h-4 w-4" strokeWidth={2} />
-            </button>
-
-            <div className="flex items-center gap-2">
+          {/* Absolute pagination bars at the bottom of the slider card.
+           * The card already reserves a 24px footer strip so the bars
+           * sit over empty space — no overlap with the description. */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-5 flex justify-center">
+            <div className="pointer-events-auto flex items-center gap-2">
               {rotating.map((c, i) => (
                 <button
                   key={c.title}
@@ -247,33 +237,12 @@ const Ecosystem = () => {
                   aria-current={i === activeIdx ? 'true' : 'false'}
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-300',
-                    i === activeIdx ? 'bg-gold-500 w-6' : 'bg-cream-300 hover:bg-cream-400 w-1.5',
+                    i === activeIdx
+                      ? 'bg-gold-400 w-6'
+                      : 'bg-cream-100/30 hover:bg-cream-100/60 w-3',
                   )}
                 />
               ))}
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setPaused((p) => !p)}
-                aria-label={paused ? 'Resume auto-advance' : 'Pause auto-advance'}
-                className="border-cream-200 text-mesh-600 hover:border-gold-400 hover:text-gold-600 inline-flex h-9 w-9 items-center justify-center rounded-full border bg-white transition-colors"
-              >
-                {paused ? (
-                  <Play className="h-3.5 w-3.5" strokeWidth={2} />
-                ) : (
-                  <Pause className="h-3.5 w-3.5" strokeWidth={2} />
-                )}
-              </button>
-              <button
-                type="button"
-                onClick={goNext}
-                aria-label="Next sponsorship card"
-                className="border-cream-200 text-navy-900 hover:border-gold-400 hover:text-gold-600 inline-flex h-9 w-9 items-center justify-center rounded-full border bg-white transition-colors"
-              >
-                <ChevronRight className="h-4 w-4" strokeWidth={2} />
-              </button>
             </div>
           </div>
         </div>
