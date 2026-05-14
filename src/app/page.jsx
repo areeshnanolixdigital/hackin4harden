@@ -1,4 +1,4 @@
-import Ecosystem from '@/components/sections/ecosystem'
+// import Ecosystem from '@/components/sections/ecosystem'
 import Faq from '@/components/sections/faq'
 import FinalCta from '@/components/sections/final-cta'
 import Founders from '@/components/sections/founders'
@@ -14,7 +14,7 @@ const HomePage = () => {
       <Hero />
       <WhyWeWin />
       <LearningJourney />
-      <Ecosystem />
+      {/* <Ecosystem /> */}
       <Testimonials />
       <Founders />
       <Location />
