@@ -45,7 +45,7 @@ const DonatePage = () => {
           eyebrow="Choose your gift"
           title={
             <>
-              Five preset amounts, or pick a <span className="text-green-500">custom</span> tier.
+              Five preset amounts to grow the <span className="text-green-500">fund</span>.
             </>
           }
           lead="Each preset reuses the same secure Stripe checkout the tournament registration uses. A Stripe receipt is emailed automatically."
